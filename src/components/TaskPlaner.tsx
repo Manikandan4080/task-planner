@@ -48,7 +48,7 @@ export default function TaskPlanner() {
   useEffect(() => {
     const savedTasks = localStorage.getItem("task-planner-tasks")
     if (savedTasks) {
-      const parsedTasks = JSON.parse(savedTasks).map((task: any) => ({
+      const parsedTasks = JSON.parse(savedTasks).map((task: Task) => ({
         ...task,
         startDate: new Date(task.startDate),
         endDate: new Date(task.endDate),
