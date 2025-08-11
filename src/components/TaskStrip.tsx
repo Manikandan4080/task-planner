@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { format, isSameDay, addDays, max, min } from "date-fns"
-import { User } from 'lucide-react'
+import { GripVertical, User } from 'lucide-react'
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -128,7 +128,7 @@ export default function TaskStrip({
           <div
             ref={stripRef}
             className={cn(
-              "absolute text-white px-2 flex items-center justify-between cursor-pointer group pointer-events-auto shadow-sm transition-all hover:shadow-md hover:scale-[1.02]",
+              "absolute text-white px-2 flex gap-3 items-center justify-between cursor-pointer group pointer-events-auto shadow-sm transition-all hover:shadow-md",
               "h-6 lg:h-7 text-xs", // Consistent height
               taskColors[task.color],
               isDragging && "opacity-50 z-50 shadow-lg scale-105 cursor-move",
@@ -137,7 +137,8 @@ export default function TaskStrip({
               isTaskStart && isTaskEnd && "rounded-full", // Single day task
               isTaskStart && !isTaskEnd && "rounded-l-full rounded-r-sm", // Start of multi-day task
               !isTaskStart && isTaskEnd && "rounded-l-sm rounded-r-full", // End of multi-day task
-              !isTaskStart && !isTaskEnd && "rounded-sm" // Middle of multi-day task
+              !isTaskStart && !isTaskEnd && "rounded-sm", // Middle of multi-day task
+            "pointer-events-none"
             )}
             style={{
               left: `${leftPercent}%`,
@@ -150,11 +151,15 @@ export default function TaskStrip({
             {/* Left resize handle */}
             {isTaskStart && (
               <div className={cn(
-                "absolute left-0 top-0 bottom-0 w-2 cursor-col-resize opacity-0 group-hover:opacity-100 bg-white/20",
+                "absolute left-0 top-0 bottom-0 w-2 cursor-col-resize opacity-0 group-hover:opacity-100 bg-white/20 pointer-events-auto",
                 isTaskStart && isTaskEnd ? "rounded-l-full" : "rounded-l-full",
                 isResizing && "opacity-100 bg-orange-300/50"
               )} />
             )}
+
+            <div className="pointer-events-auto ml-2">
+            <GripVertical className="w-4 h-4 text-gray-600 hover:text-gray-900" />
+            </div>
             
             <div className="flex items-center gap-1 flex-1 min-w-0">
               {/* Priority badge */}
@@ -184,7 +189,7 @@ export default function TaskStrip({
             {/* Right resize handle */}
             {isTaskEnd && (
               <div className={cn(
-                "absolute right-0 top-0 bottom-0 w-2 cursor-col-resize opacity-0 group-hover:opacity-100 bg-white/20",
+                "absolute right-0 top-0 bottom-0 w-2 cursor-col-resize opacity-0 group-hover:opacity-100 bg-white/20 pointer-events-auto",
                 isTaskStart && isTaskEnd ? "rounded-r-full" : "rounded-r-full",
                 isResizing && "opacity-100 bg-orange-300/50"
               )} />
