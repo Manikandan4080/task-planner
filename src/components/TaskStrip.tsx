@@ -71,7 +71,7 @@ export default function TaskStrip({
 
   const leftPercent = (startDayIndex / 7) * 100
   const widthPercent = ((endDayIndex - startDayIndex + 1) / 7) * 100
-  const topOffset = 25 + (taskIndex * 28) // Better spacing for mobile
+  const topOffset = 25 + (taskIndex * 28) + (taskIndex*3) // Better spacing for mobile
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -157,9 +157,9 @@ export default function TaskStrip({
               )} />
             )}
 
-            <div className="pointer-events-auto ml-2">
+            {isTaskStart && <div className="pointer-events-auto ml-2">
             <GripVertical className="w-4 h-4 text-gray-600 hover:text-gray-900" />
-            </div>
+            </div>}
             
             <div className="flex items-center gap-1 flex-1 min-w-0">
               {/* Priority badge */}
